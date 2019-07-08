@@ -80,4 +80,5 @@ rm -f "../bin/${appname}.app/Contents/Info.plist-e"
 
 echo "Done. Goodbye."
 cd "$oldpwd"
+
 exit 0
