@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>CFBundleExecutable</key>
+        <string>JavaApplicationStub</string>
+        <key>CFBundleGetInfoString</key>
+        <string>#{CHANGE_ME.RUNNABLE_NO_X} 1.0, Copyright {user} #{COPYRIGHT_YEAR}. All rights reserved.</string>
+        <key>CFBundleInfoDictionaryVersion</key>
+        <string>6.0</string>
+        <key>CFBundleIconFile</key>
+        <string>#{APP_ICON_TO_CHANGE}</string>
+        <key>CFBundleIdentifier</key>
+        <string>#{APP_NAME}</string>
+        <key>CFBundleName</key>
+        <string>#{APP_NAME}</string>
+        <key>CFBundlePackageType</key>
+        <string>APPL</string>
+        <key>CFBundleSignature</key>
+        <string>????</string>
+        <key>CFBundleVersion</key>
+        <string>#{VERSION}</string>
+        <key>JVMMainClassName</key>
+		<string>#{MAIN_CLASS}</string>
+        <key>Java</key>
+        <dict>
+            <key>JVMVersion</key>
+            <string>#{JAVA_VERSION}</string>
+            <key>MainClass</key>
+            <string>#{MAIN_CLASS}</string>
+            <key>Arguments</key>
+            <array/>
+            <key>ClassPath</key>
+            <string>$JAVAROOT/#{CHANGE_ME.RUNNABLE}</string>
+        </dict>
+    </dict>
+</plist>
