@@ -12,7 +12,7 @@ fi
 
 if [ -d "../bin/${appname}.app" ]
 then
-  echo "${appname}.app already exists! Overwriting..."
+  printf "${appname}.app already exists! Overwriting...\n"
   rm -rf "../bin/${appname}.app"
 fi
 
@@ -63,7 +63,7 @@ fi
 
 read -p "Enter the Java main class: " mainclass
 
-echo "Setting up Info.plist..."
+printf "Setting up Info.plist...\n"
 
 infofile="../bin/${appname}.app/Contents/Info.plist"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE_NO_X}/$appjarnameonly/g" "${infofile}"
@@ -75,10 +75,10 @@ sed -i -e "s/#{MAIN_CLASS}/$mainclass/g" "${infofile}"
 sed -i -e "s/#{JAVA_VERSION}/$javaversion/g" "${infofile}"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE}/$appjar/g" "${infofile}"
 
-echo "Removing temp files..."
+printf "Removing temp files...\n"
 rm -f "../bin/${appname}.app/Contents/Info.plist-e"
 
-echo "Done. Goodbye."
+printf "Done. Goodbye.\n"
 cd "$oldpwd"
 
 exit 0
