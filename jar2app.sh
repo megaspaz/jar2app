@@ -2,7 +2,7 @@
 
 oldpwd=`pwd`
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1;
 
 read -p "Enter App's name. Leave blank for default App name [AppRoot]: " appname
 if [ -z "${appname}" ]
@@ -10,10 +10,10 @@ then
   appname="AppRoot"
 fi
 
-if [ -d "../bin/${appname}.app" ]
+if [ -d "./bin/${appname}.app" ]
 then
-  printf "${appname}.app already exists! Overwriting...\n"
-  rm -rf "../bin/${appname}.app"
+  printf "%s.app already exists! Overwriting...\n" "${appname}"
+  rm -rf "./bin/${appname}.app"
 fi
 
 read -p "Enter the App's version. Leave blank [1.0.1]: " appversion
@@ -22,11 +22,11 @@ then
   appversion="1.0.1"
 fi
 
-cp -R ../AppRoot "../bin/${appname}.app"
+cp -R ./AppRoot "./bin/${appname}.app"
 
-chmod +x "../bin/${appname}.app/Contents/MacOS/JavaApplicationStub"
+chmod +x "./bin/${appname}.app/Contents/MacOS/JavaApplicationStub"
 
-defaulticonlocation="../bin/${appname}.app/Contents/Resources/AppIconToChange.icns"
+defaulticonlocation="./bin/${appname}.app/Contents/Resources/AppIconToChange.icns"
 read -p "Enter App Icon location. Leave blank for default: " appiconlocation
 if [ -z "${appiconlocation}" ]
 then
@@ -37,7 +37,7 @@ else
 fi
 appicon="$(basename "$appiconlocation")"
 
-defaultjarlocation="../bin/${appname}.app/Contents/Java/change_me.runnable.jar"
+defaultjarlocation="./bin/${appname}.app/Contents/Java/change_me.runnable.jar"
 read -p "Enter App Jar location. Leave blank for default: " appjarlocation
 if [ -z "${appjarlocation}" ]
 then
@@ -65,7 +65,7 @@ read -p "Enter the Java main class: " mainclass
 
 printf "Setting up Info.plist...\n"
 
-infofile="../bin/${appname}.app/Contents/Info.plist"
+infofile="./bin/${appname}.app/Contents/Info.plist"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE_NO_X}/$appjarnameonly/g" "${infofile}"
 sed -i -e "s/#{COPYRIGHT_YEAR}/$copyrightyear/g" "${infofile}"
 sed -i -e "s/#{APP_ICON_TO_CHANGE}/$appicon/g" "${infofile}"
@@ -76,9 +76,9 @@ sed -i -e "s/#{JAVA_VERSION}/$javaversion/g" "${infofile}"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE}/$appjar/g" "${infofile}"
 
 printf "Removing temp files...\n"
-rm -f "../bin/${appname}.app/Contents/Info.plist-e"
+rm -f "./bin/${appname}.app/Contents/Info.plist-e"
 
 printf "Done. Goodbye.\n"
-cd "$oldpwd"
+cd "$oldpwd" || exit 0;
 
 exit 0
