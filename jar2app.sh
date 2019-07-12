@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-oldpwd=`pwd`
+oldpwd=$(pwd)
 
 cd "$(dirname "$0")" || exit 1;
 
