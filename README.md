@@ -1,3 +1,3 @@
 # jar2app
 
-Just clone or download this repo, cd to either the **src** or **bin** directory to run the **jar2app.sh** script. If your project deploys to a jar, just deploy instead as a runnable jar file. The script writes an **app** file to the **bin** directory. As far as the **bin** directory having a copy of the script, that's because I set this up originally to be a java project in Eclipse...
+Just clone or download this repo, run the **jar2app.sh** script. If your project deploys to a jar, just deploy instead as a runnable jar file. The script writes an **app** file to the **bin** directory.  
