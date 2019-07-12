@@ -2,7 +2,7 @@
 
 oldpwd=`pwd`
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1;
 
 read -p "Enter App's name. Leave blank for default App name [AppRoot]: " appname
 if [ -z "${appname}" ]
@@ -12,7 +12,7 @@ fi
 
 if [ -d "./bin/${appname}.app" ]
 then
-  printf "${appname}.app already exists! Overwriting...\n"
+  printf "%s.app already exists! Overwriting...\n" "${appname}"
   rm -rf "./bin/${appname}.app"
 fi
 
@@ -22,7 +22,7 @@ then
   appversion="1.0.1"
 fi
 
-cp -R ../AppRoot "./bin/${appname}.app"
+cp -R ./AppRoot "./bin/${appname}.app"
 
 chmod +x "./bin/${appname}.app/Contents/MacOS/JavaApplicationStub"
 
@@ -79,6 +79,6 @@ printf "Removing temp files...\n"
 rm -f "./bin/${appname}.app/Contents/Info.plist-e"
 
 printf "Done. Goodbye.\n"
-cd "$oldpwd"
+cd "$oldpwd" || exit 0;
 
 exit 0
