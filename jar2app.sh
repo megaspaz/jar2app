@@ -1,10 +1,26 @@
 #!/usr/bin/env bash
 
+function file_exists {
+  if [ ! -f "${1}" ]
+  then
+    printf "%s not found. Exiting...\n" "${1}"
+    exit 1
+  fi
+}
+
+function file_type_correct {
+  if [[ ! "${1}" == *"${2}" ]]
+  then
+    printf "%s not of *%s. Exiting...\n" "${1}" "${2}"
+    exit 1
+  fi
+}
+
 oldpwd=$(pwd)
 
 cd "$(dirname "$0")" || exit 1;
 
-read -p "Enter App's name. Leave blank for default App name [AppRoot]: " appname
+read -r -p "Enter App's name. Leave blank for default App name [AppRoot]: " appname
 if [ -z "${appname}" ]
 then
   appname="AppRoot"
@@ -16,7 +32,7 @@ then
   rm -rf "./bin/${appname}.app"
 fi
 
-read -p "Enter the App's version. Leave blank [1.0.1]: " appversion
+read -r -p "Enter the App's version. Leave blank [1.0.1]: " appversion
 if [ -z "${appversion}" ]
 then
   appversion="1.0.1"
@@ -27,41 +43,45 @@ cp -R ./AppRoot "./bin/${appname}.app"
 chmod +x "./bin/${appname}.app/Contents/MacOS/JavaApplicationStub"
 
 defaulticonlocation="./bin/${appname}.app/Contents/Resources/AppIconToChange.icns"
-read -p "Enter App Icon location. Leave blank for default: " appiconlocation
+read -r -p "Enter App Icon location. Leave blank for default: " appiconlocation
 if [ -z "${appiconlocation}" ]
 then
   appiconlocation=$defaulticonlocation
 else
+  file_type_correct "${appiconlocation}" ".icns"
+  file_exists "${appiconlocation}"
   rm -f "${defaulticonlocation}"
   cp "${appiconlocation}" "$(dirname "$defaulticonlocation")/."
 fi
 appicon="$(basename "$appiconlocation")"
 
 defaultjarlocation="./bin/${appname}.app/Contents/Java/change_me.runnable.jar"
-read -p "Enter App Jar location. Leave blank for default: " appjarlocation
+read -r -p "Enter App Jar location. Leave blank for default: " appjarlocation
 if [ -z "${appjarlocation}" ]
 then
   appjarlocation=$defaultjarlocation
 else
+  file_type_correct "${appjarlocation}" ".jar"
+  file_exists "${appjarlocation}"
   rm -f "${defaultjarlocation}"
   cp "${appjarlocation}" "$(dirname "$defaultjarlocation")/."
 fi
 appjar="$(basename "$appjarlocation")"
 appjarnameonly=${appjar%".jar"}
 
-read -p "Enter the Java version. Leave blank [1.8]: " javaversion
+read -r -p "Enter the Java version. Leave blank [1.8]: " javaversion
 if [ -z "${javaversion}" ]
 then
   javaversion="1.8"
 fi
 
-read -p "Enter copyright year. Leave blank for current year [$(date +'%Y')]: " copyrightyear
+read -r -p "Enter copyright year. Leave blank for current year [$(date +'%Y')]: " copyrightyear
 if [ -z "${copyrightyear}" ]
 then
   copyrightyear="$(date +'%Y')"
 fi
 
-read -p "Enter the Java main class: " mainclass
+read -r -p "Enter the Java main class: " mainclass
 
 printf "Setting up Info.plist...\n"
 
