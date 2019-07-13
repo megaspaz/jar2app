@@ -1,17 +1,9 @@
 #!/usr/bin/env bash
 
-function file_exists {
-  if [ ! -f "${1}" ]
+function valid_file_input {
+  if [ ! -f "${1}" ] || [[ ! "${1}" == *"${2}" ]]
   then
-    printf "%s not found. Exiting...\n" "${1}"
-    exit 1
-  fi
-}
-
-function file_type_correct {
-  if [[ ! "${1}" == *"${2}" ]]
-  then
-    printf "%s not of *%s. Exiting...\n" "${1}" "${2}"
+    printf "%s not found or not of *%s filetype. Exiting...\n" "${1}" "${2}"
     exit 1
   fi
 }
@@ -48,8 +40,7 @@ if [ -z "${appiconlocation}" ]
 then
   appiconlocation=$defaulticonlocation
 else
-  file_exists "${appiconlocation}"
-  file_type_correct "${appiconlocation}" ".icns"
+  valid_file_input "${appiconlocation}" ".icns"
   rm -f "${defaulticonlocation}"
   cp "${appiconlocation}" "$(dirname "$defaulticonlocation")/."
 fi
@@ -61,8 +52,7 @@ if [ -z "${appjarlocation}" ]
 then
   appjarlocation=$defaultjarlocation
 else
-  file_exists "${appjarlocation}"
-  file_type_correct "${appjarlocation}" ".jar"
+  valid_file_input "${appjarlocation}" ".jar"
   rm -f "${defaultjarlocation}"
   cp "${appjarlocation}" "$(dirname "$defaultjarlocation")/."
 fi
@@ -81,7 +71,11 @@ then
   copyrightyear="$(date +'%Y')"
 fi
 
-read -r -p "Enter the Java main class: " mainclass
+mainclass=""
+until [ ! -z "${mainclass}" ]
+do
+  read -r -p "Enter the Java main class: " mainclass
+done
 
 printf "Setting up Info.plist...\n"
 
@@ -99,6 +93,6 @@ printf "Removing temp files...\n"
 rm -f "./out/${appname}.app/Contents/Info.plist-e"
 
 printf "Done. Goodbye.\n"
-cd "$oldpwd" || exit 0;
+cd "$oldpwd" || exit 1;
 
 exit 0
