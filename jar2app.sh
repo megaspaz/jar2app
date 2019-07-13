@@ -48,8 +48,8 @@ if [ -z "${appiconlocation}" ]
 then
   appiconlocation=$defaulticonlocation
 else
-  file_type_correct "${appiconlocation}" ".icns"
   file_exists "${appiconlocation}"
+  file_type_correct "${appiconlocation}" ".icns"
   rm -f "${defaulticonlocation}"
   cp "${appiconlocation}" "$(dirname "$defaulticonlocation")/."
 fi
@@ -61,8 +61,8 @@ if [ -z "${appjarlocation}" ]
 then
   appjarlocation=$defaultjarlocation
 else
-  file_type_correct "${appjarlocation}" ".jar"
   file_exists "${appjarlocation}"
+  file_type_correct "${appjarlocation}" ".jar"
   rm -f "${defaultjarlocation}"
   cp "${appjarlocation}" "$(dirname "$defaultjarlocation")/."
 fi
