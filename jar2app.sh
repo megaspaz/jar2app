@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+############################################################
+# Script Name  : jar2app                                   #
+# Description  : Create a Mac app from a simple Jar file.  #
+# Args         :                                           #
+# Author       : megaspaz                                  #
+# Email        : megaspaz2k7@gmail.com                     #
+############################################################
+
 function valid_file_input {
   if [ ! -f "${1}" ] || [[ ! "${1}" == *"${2}" ]]
   then
