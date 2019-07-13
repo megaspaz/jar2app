@@ -30,9 +30,10 @@ then
   appversion="1.0.1"
 fi
 
+printf "Generating %s.app skeleton...\n" "${appname}"
 cp -R ./AppRoot "./out/${appname}.app"
-
 chmod +x "./out/${appname}.app/Contents/MacOS/JavaApplicationStub"
+printf "Done generating %s.app skeleton...\n" "${appname}"
 
 defaulticonlocation="./out/${appname}.app/Contents/Resources/AppIconToChange.icns"
 read -r -p "Enter App Icon location. Leave blank for default: " appiconlocation
