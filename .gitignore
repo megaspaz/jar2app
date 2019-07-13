@@ -1,0 +1,7 @@
+.git
+.gitconfig
+.gitignore
+.DS_Store
+.idea
+*.iml
+out
