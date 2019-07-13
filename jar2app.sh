@@ -26,10 +26,10 @@ then
   appname="AppRoot"
 fi
 
-if [ -d "./bin/${appname}.app" ]
+if [ -d "./out/${appname}.app" ]
 then
   printf "%s.app already exists! Overwriting...\n" "${appname}"
-  rm -rf "./bin/${appname}.app"
+  rm -rf "./out/${appname}.app"
 fi
 
 read -r -p "Enter the App's version. Leave blank [1.0.1]: " appversion
@@ -38,11 +38,11 @@ then
   appversion="1.0.1"
 fi
 
-cp -R ./AppRoot "./bin/${appname}.app"
+cp -R ./AppRoot "./out/${appname}.app"
 
-chmod +x "./bin/${appname}.app/Contents/MacOS/JavaApplicationStub"
+chmod +x "./out/${appname}.app/Contents/MacOS/JavaApplicationStub"
 
-defaulticonlocation="./bin/${appname}.app/Contents/Resources/AppIconToChange.icns"
+defaulticonlocation="./out/${appname}.app/Contents/Resources/AppIconToChange.icns"
 read -r -p "Enter App Icon location. Leave blank for default: " appiconlocation
 if [ -z "${appiconlocation}" ]
 then
@@ -55,7 +55,7 @@ else
 fi
 appicon="$(basename "$appiconlocation")"
 
-defaultjarlocation="./bin/${appname}.app/Contents/Java/change_me.runnable.jar"
+defaultjarlocation="./out/${appname}.app/Contents/Java/change_me.runnable.jar"
 read -r -p "Enter App Jar location. Leave blank for default: " appjarlocation
 if [ -z "${appjarlocation}" ]
 then
@@ -85,7 +85,7 @@ read -r -p "Enter the Java main class: " mainclass
 
 printf "Setting up Info.plist...\n"
 
-infofile="./bin/${appname}.app/Contents/Info.plist"
+infofile="./out/${appname}.app/Contents/Info.plist"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE_NO_X}/$appjarnameonly/g" "${infofile}"
 sed -i -e "s/#{COPYRIGHT_YEAR}/$copyrightyear/g" "${infofile}"
 sed -i -e "s/#{APP_ICON_TO_CHANGE}/$appicon/g" "${infofile}"
@@ -96,7 +96,7 @@ sed -i -e "s/#{JAVA_VERSION}/$javaversion/g" "${infofile}"
 sed -i -e "s/#{CHANGE_ME.RUNNABLE}/$appjar/g" "${infofile}"
 
 printf "Removing temp files...\n"
-rm -f "./bin/${appname}.app/Contents/Info.plist-e"
+rm -f "./out/${appname}.app/Contents/Info.plist-e"
 
 printf "Done. Goodbye.\n"
 cd "$oldpwd" || exit 0;
