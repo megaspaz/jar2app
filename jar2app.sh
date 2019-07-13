@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ############################################################
-# Script Name  : jar2app                                   #
+# Script Name  : jar2app.sh                                #
 # Description  : Create a Mac app from a simple Jar file.  #
 # Args         :                                           #
 # Author       : megaspaz                                  #
