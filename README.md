@@ -2,7 +2,8 @@
 # jar2app
 
 1. Just clone or download this repo
-2. Run the **jar2app.sh** script. 
-3. The script writes an **app** file to the **out** directory.  
+2. Run the **jar2app.sh** script.
+3. Fill in the necessary information, like icon and/or jar location, etc.
+4. The script writes an **app** file to the **out** directory.  
 
 If your project deploys to a jar, just deploy instead as a runnable jar file.
