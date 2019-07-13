@@ -6,6 +6,7 @@
 # Args         :                                           #
 # Author       : megaspaz                                  #
 # Email        : megaspaz2k7@gmail.com                     #
+# Copyright    : (c) 2019                                  #
 ############################################################
 
 function valid_file_input {
