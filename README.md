@@ -1,5 +1,6 @@
-![](https://media1.giphy.com/media/tx5ZCFBWmYhvW/giphy.gif?cid=790b76115d2a5b94314b32692e6efa5d&rid=giphy.gif)
 # jar2app
+
+![](https://media1.giphy.com/media/tx5ZCFBWmYhvW/giphy.gif?cid=790b76115d2a5b94314b32692e6efa5d&rid=giphy.gif)
 
 1. Just clone or download this repo
 2. Run the **jar2app.sh** script.
